@@ -43,9 +43,20 @@ local get_visual = function(args, parent)
         return sn(nil, i(1))
     end
 end
+-- For beamer 
+tex_utils.in_beamer = function()
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    for _, line in ipairs(lines) do
+        if line:match("\\documentclass{beamer}") then
+            return true
+        end
+    end
+    return false
+end
 
 -- only expand in new line 
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
+
 
 return {
     -- greak latters
@@ -85,7 +96,7 @@ return {
             <>
         \]
     ]], { i(1, "equation") }) ),
-    
+
     s({trig="env", snippetType="autosnippet"},
         fmta(
             [[
@@ -100,7 +111,7 @@ return {
             }
         )
     ),
-    
+
     s({trig="*eqn", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
         fmta(
             [[
@@ -111,7 +122,7 @@ return {
             { i(1) }
         )
     ),
-    
+
     s({trig="eqn", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
         fmta(
             [[
@@ -122,7 +133,7 @@ return {
             { i(1) }
         )
     ),
-    
+
     s({trig="*aln", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
         fmta(
             [[
@@ -133,7 +144,7 @@ return {
             { i(1) }
         )
     ),
-    
+
     s({trig="aln", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
         fmta(
             [[
@@ -144,7 +155,7 @@ return {
             { i(1) }
         )
     ),
-    
+
     s({trig="enumerate", dscr="enumerate"},
         fmta(
             [[
@@ -155,7 +166,7 @@ return {
             { i(1) }
         )
     ),
-    
+
     s({trig="itemize", dscr="itemize"},
         fmta(
             [[
@@ -166,9 +177,9 @@ return {
             { i(1) }
         )
     ),
-    
+
     s({trig="itm", snippetType="autosnippet"}, fmta([[ \item <> ]], {i(1, "item")})),
-    
+
     s({trig="figuer", dscr="for picture insert in latex"},
         fmta(
             [[
@@ -187,6 +198,58 @@ return {
         ),
         {condition = line_begin}
     ),
+
+    s({trig='diff', snippetType='autosnippet'},
+        fmta(
+            [[
+            \begin{definition}[<>]
+                <>
+            \end{definition}
+            <>
+            ]], { i(1), i(2), i(0) }
+        ), {condition = line_begin}
+    ),
+
+    s({trig='thrm', snippetType='autosnippet'},
+        fmta(
+            [[
+            \begin{theorem}[<>]
+                <>
+            \end{theorem}
+            <>
+            ]], { i(1), i(2), i(0) }
+        ), {condition = line_begin}
+    ),
+
+    s({trig='prf', snippetType='autosnippet'},
+        fmta(
+            [[
+            \begin{proof}
+                <>
+            \end{proof}
+            ]], { i(1) }
+        ), {condition = line_begin}
+    ),
+
+    s({trig='eg', snippetType='autosnippet'},
+        fmta(
+            [[
+            \begin{example}
+                <>
+            \end{example}
+            ]], { i(1) }
+        ), {condition = line_begin}
+    ),
+
+    s({trig="bfr", snippetType="autosnippet", dscr='begin frame and enf frame for beamer presentstion'},
+        {
+            t({ "\\begin{frame}{" }),
+            i(1, "frame title"),
+            t({ "}", "\t" }),
+            i(0),
+            t({ "", "\\end{frame}" }),
+        },
+        { condition = tex_utils.in_beamer }),
 
     -- text mods
     s({trig="txt", snippetType="autosnippet"}, fmta([[ \text{<>} ]], { i(1) }), {condition = tex_utils.in_mathzone}),
