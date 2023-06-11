@@ -37,9 +37,9 @@ require('lualine').setup {
             },
             'filesize'},
         lualine_x = {'encoding',
-            {'fileformat'},
+            {'fileformat', icons_enabled = false},
+            'filetype',
             {
-                -- Lsp server name .
                 function()
                     local msg = 'No Active Lsp'
                     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -55,9 +55,8 @@ require('lualine').setup {
                     end
                     return msg
                 end,
-                icon = ' LSP:',
+                icon = ' ',
             },
-            'filetype',
         },
         lualine_y = {'progress'},
     lualine_z = {'location'}
