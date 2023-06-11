@@ -24,5 +24,5 @@ require("tokyonight").setup({
     sidebars = { "qf", "vista_kind", "terminal", "packer" },
 })
 
-color = color or "catppuccin-mocha"
+local color = color or "catppuccin-mocha"
 vim.cmd.colorscheme(color)

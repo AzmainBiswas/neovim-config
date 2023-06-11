@@ -5,8 +5,13 @@ return {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    -- lualine 
+    {
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' }
+    },
     -- nvim-tree
-   {
+    {
         "nvim-tree/nvim-tree.lua",
         version = "*",
         dependencies = {
@@ -41,10 +46,13 @@ return {
             -- Autocompletion
             {'hrsh7th/nvim-cmp'},     -- Required
             {'hrsh7th/cmp-nvim-lsp'}, -- Required
-            {'L3MON4D3/LuaSnip'},     -- Required
         }
     },
-
+    -- Snipets
+    {'L3MON4D3/LuaSnip'},
+    { 'saadparwaiz1/cmp_luasnip' },
+    -- vimtex 
+    'lervag/vimtex',
     -- colorschemes
     "folke/tokyonight.nvim",
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
