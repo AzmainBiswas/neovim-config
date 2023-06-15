@@ -54,7 +54,7 @@ return {
     {'L3MON4D3/LuaSnip'},
     { 'saadparwaiz1/cmp_luasnip' },
     -- vimtex 
-    'lervag/vimtex',
+    -- 'lervag/vimtex',
     -- colorschemes
     "folke/tokyonight.nvim",
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
