@@ -26,3 +26,6 @@ vim.keymap.set("n", "<leader>cc", vim.cmd.ColorToggle)
 -- use less pluging of all time 
 vim.keymap.set("n", "<leader>fcr", "<cmd>CellularAutomaton make_it_rain<CR>")
 vim.keymap.set("n", "<leader>fcl", "<cmd>CellularAutomaton game_of_life<CR>")
+
+-- spell checker
+vim.keymap.set('n', '<leader>ss', '<CMD>set spell!<CR>')
