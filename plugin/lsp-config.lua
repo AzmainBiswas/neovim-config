@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
     "lua_ls",
-    "pyright",
+--    "pyright",
     "texlab",
     "ltex",
 })
@@ -60,3 +60,5 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true
 })
+
+require'lspconfig'.pyright.setup{}
