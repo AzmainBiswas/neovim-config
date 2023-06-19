@@ -32,5 +32,5 @@ require("nvim-tree").setup {
     },
 }
 
-vim.keymap.set("n", "<leader>vp" , vim.cmd.NvimTreeToggle)
-vim.keymap.set("n", "<leader>vf" , vim.cmd.NvimTreeFocus)
+vim.keymap.set("n", "<leader>no" , vim.cmd.NvimTreeToggle)
+vim.keymap.set("n", "<leader>nf" , vim.cmd.NvimTreeFocus)

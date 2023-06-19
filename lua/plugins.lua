@@ -13,16 +13,16 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
     -- nvim-tree
-    {
-        "nvim-tree/nvim-tree.lua",
-        version = "*",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-        },
-        config = function()
-            require("nvim-tree").setup {}
-        end,
-    },
+     {
+         "nvim-tree/nvim-tree.lua",
+         version = "*",
+         dependencies = {
+             "nvim-tree/nvim-web-devicons",
+         },
+         config = function()
+             require("nvim-tree").setup {}
+         end,
+     },
     -- tree-sitter
     {
         {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}, 
