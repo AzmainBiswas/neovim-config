@@ -13,16 +13,16 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
     -- nvim-tree
-     {
-         "nvim-tree/nvim-tree.lua",
-         version = "*",
-         dependencies = {
-             "nvim-tree/nvim-web-devicons",
-         },
-         config = function()
-             require("nvim-tree").setup {}
-         end,
-     },
+--     {
+--         "nvim-tree/nvim-tree.lua",
+--         version = "*",
+--         dependencies = {
+--             "nvim-tree/nvim-web-devicons",
+--         },
+--         config = function()
+--             require("nvim-tree").setup {}
+--         end,
+--     },
     -- tree-sitter
     {
         {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}, 
@@ -55,6 +55,11 @@ return {
     { 'saadparwaiz1/cmp_luasnip' },
     -- vimtex 
     'lervag/vimtex',
+    -- vim-tmux-navigator
+    {
+        'christoomey/vim-tmux-navigator',
+        lazy = false,
+    },
     -- colorschemes
     "folke/tokyonight.nvim",
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
