@@ -1,31 +1,41 @@
 return {
-    {"folke/which-key.nvim", lazy=true },
-    { "lukas-reineke/indent-blankline.nvim" },-- indent indecator
+    { "folke/which-key.nvim",    lazy = true },
     'chrisbra/Colorizer',
     -- telescope
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.1',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
-    -- lualine 
+    -- lualine
     {
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' }
     },
+    -- dashbord
+    {
+        'glepnir/dashboard-nvim',
+        event = 'VimEnter',
+        config = function()
+            require('dashboard').setup {
+            }
+        end,
+        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+    },
     -- nvim-tree
---     {
---         "nvim-tree/nvim-tree.lua",
---         version = "*",
---         dependencies = {
---             "nvim-tree/nvim-web-devicons",
---         },
---         config = function()
---             require("nvim-tree").setup {}
---         end,
---     },
+    --     {
+    --         "nvim-tree/nvim-tree.lua",
+    --         version = "*",
+    --         dependencies = {
+    --             "nvim-tree/nvim-web-devicons",
+    --         },
+    --         config = function()
+    --             require("nvim-tree").setup {}
+    --         end,
+    --     },
     -- tree-sitter
     {
-        {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
+        { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
         'nvim-treesitter/nvim-treesitter-context',
     },
     "eandrju/cellular-automaton.nvim",
@@ -36,29 +46,46 @@ return {
         branch = 'v2.x',
         dependencies = {
             -- LSP Support
-            {'neovim/nvim-lspconfig'},             -- Required
-            {                                      -- Optional
+            { 'neovim/nvim-lspconfig' }, -- Required
+            {                            -- Optional
                 'williamboman/mason.nvim',
                 build = function()
                     pcall(vim.cmd, 'MasonUpdate')
                 end,
             },
-            {'williamboman/mason-lspconfig.nvim'}, -- Optional
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            {'hrsh7th/nvim-cmp'},     -- Required
-            {'hrsh7th/cmp-nvim-lsp'}, -- Required
-        }
+            { 'hrsh7th/nvim-cmp' },     -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+        },
     },
+    -- fancy UI
+    {
+        "jinzhongjia/LspUI.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("LspUI").setup()
+        end
+    },
+    {
+        'j-hui/fidget.nvim',
+        tag = "legacy",
+        config = function()
+            require("fidget").setup()
+        end,
+    },
+    -- git
+    { "tpope/vim-fugitive" },
     -- Snipets
-    {'L3MON4D3/LuaSnip'},
+    { 'L3MON4D3/LuaSnip' },
     { 'saadparwaiz1/cmp_luasnip' },
-    -- vimtex 
+    -- vimtex
     'lervag/vimtex',
     -- vim-tmux-navigator
     -- {'christoomey/vim-tmux-navigator', lazy = false},
     -- colorschemes
     "folke/tokyonight.nvim",
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
     { "ellisonleao/gruvbox.nvim", priority = 1000 },
 }

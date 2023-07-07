@@ -31,10 +31,13 @@ local mappings = {
     v = {
         name = "file and lsp shit",
         p = {"<CMD>Ex<CR>", "open Ex"},
-        d = {function() vim.diagnostic.open_float() end, "diagnostic.open_float"},
-        ca = {function() vim.lsp.buf.code_action() end, "buf.code_action"},
+        -- d = {function() vim.diagnostic.open_float() end, "diagnostic.open_float"},
+        -- ca = {function() vim.lsp.buf.code_action() end, "buf.code_action"},
         rr = {function() vim.lsp.buf.references() end, "buf.references"},
-        rn = {function() vim.lsp.buf.rename() end, "rename variables"},
+        -- rn = {function() vim.lsp.buf.rename() end, "rename variables"},
+        ca = {"<CMD>LspUI code_action<CR>", "LspUI code_action"},
+        d = {"<CMD>LspUI diagnostic<CR>", "LspUI diagnostic"},
+        rn = {"<CMD>LspUI rename<CR>", "LspUI rename"}
     },
     c = { c = {function() vim.cmd("ColorToggle") end, "Enable Hex colors Preview"} },
     s = {
