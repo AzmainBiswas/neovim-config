@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.keymap.set("n", "<leader>vp", "<CMD>Ex<CR>")
+-- vim.keymap.set("n", "<leader>vp", "<CMD>Ex<CR>")
 vim.keymap.set({"n", "i", "s"}, "<C-S>", "<ESC><CMD>w<CR>")
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
@@ -21,11 +21,11 @@ vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
-vim.keymap.set("n", "<leader>cc", vim.cmd.ColorToggle)
+-- vim.keymap.set("n", "<leader>cc", vim.cmd.ColorToggle)
 
 -- use less pluging of all time 
 vim.keymap.set("n", "<leader>gcr", "<cmd>CellularAutomaton make_it_rain<CR>")
 vim.keymap.set("n", "<leader>gcl", "<cmd>CellularAutomaton game_of_life<CR>")
 
 -- spell checker
-vim.keymap.set('n', '<leader>ss', '<CMD>set spell!<CR>')
+-- vim.keymap.set('n', '<leader>ss', '<CMD>set spell!<CR>')

@@ -1,5 +1,5 @@
 return {
-    "folke/which-key.nvim",
+    {"folke/which-key.nvim", lazy=true },
     { "lukas-reineke/indent-blankline.nvim" },-- indent indecator
     'chrisbra/Colorizer',
     -- telescope
@@ -25,7 +25,7 @@ return {
 --     },
     -- tree-sitter
     {
-        {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"}, 
+        {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
         'nvim-treesitter/nvim-treesitter-context',
     },
     "eandrju/cellular-automaton.nvim",
@@ -56,10 +56,7 @@ return {
     -- vimtex 
     'lervag/vimtex',
     -- vim-tmux-navigator
-    {
-        'christoomey/vim-tmux-navigator',
-        lazy = false,
-    },
+    -- {'christoomey/vim-tmux-navigator', lazy = false},
     -- colorschemes
     "folke/tokyonight.nvim",
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
