@@ -1,6 +1,7 @@
 return {
     { "folke/which-key.nvim",    lazy = true },
-    'chrisbra/Colorizer',
+    { 'chrisbra/Colorizer' },
+    { "dstein64/vim-startuptime" },
     -- telescope
     {
         'nvim-telescope/telescope.nvim',
@@ -35,37 +36,91 @@ return {
     --     },
     -- tree-sitter
     {
-        { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+        { "nvim-treesitter/nvim-treesitter", build = ":tsupdate" },
         'nvim-treesitter/nvim-treesitter-context',
     },
-    "eandrju/cellular-automaton.nvim",
-
-    -- LSP
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v2.x',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' }, -- Required
-            {                            -- Optional
-                'williamboman/mason.nvim',
-                build = function()
-                    pcall(vim.cmd, 'MasonUpdate')
+        "folke/flash.nvim",
+        event = "verylazy",
+        opts = {},
+        keys = {
+            {
+                "s",
+                mode = { "n", "x", "o" },
+                function()
+                    require("flash").jump({
+                          search = {
+    mode = function(str)
+      return "\\<" .. str
+    end,
+  },
+                    })
                 end,
+                desc = "flash",
             },
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },     -- Required
-            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            {
+                "s",
+                mode = { "n", "o", "x" },
+                function()
+                    require("flash").treesitter()
+                end,
+                desc = "flash treesitter",
+            },
+            {
+                "r",
+                mode = "o",
+                function()
+                    require("flash").remote()
+                end,
+                desc = "remote flash",
+            },
+            {
+                "r",
+                mode = { "o", "x" },
+                function()
+                    require("flash").treesitter_search()
+                end,
+                desc = "flash treesitter search",
+            },
+            {
+                "<c-s>",
+                mode = { "c" },
+                function()
+                    require("flash").toggle()
+                end,
+                desc = "toggle flash search",
+            },
         },
     },
-    -- fancy UI
+    -- useless
+    { "eandrju/cellular-automaton.nvim" },
+
+    -- lsp
     {
-        "jinzhongjia/LspUI.nvim",
-        event = "VeryLazy",
+        'vonheikemen/lsp-zero.nvim',
+        branch = 'v2.x',
+        dependencies = {
+            -- lsp support
+            { 'neovim/nvim-lspconfig' }, -- required
+            {                            -- optional
+                'williamboman/mason.nvim',
+                build = function()
+                    pcall(vim.cmd, 'masonupdate')
+                end,
+            },
+            { 'williamboman/mason-lspconfig.nvim' }, -- optional
+
+            -- autocompletion
+            { 'hrsh7th/nvim-cmp' },     -- required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- required
+        },
+    },
+    -- fancy ui
+    {
+        "jinzhongjia/lspui.nvim",
+        event = "verylazy",
         config = function()
-            require("LspUI").setup()
+            require("lspui").setup()
         end
     },
     {
@@ -77,8 +132,8 @@ return {
     },
     -- git
     { "tpope/vim-fugitive" },
-    -- Snipets
-    { 'L3MON4D3/LuaSnip' },
+    -- snipets
+    { 'l3mon4d3/luasnip' },
     { 'saadparwaiz1/cmp_luasnip' },
     -- vimtex
     'lervag/vimtex',
