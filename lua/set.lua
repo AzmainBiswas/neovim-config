@@ -6,7 +6,7 @@ vim.opt.number = true
 vim.opt.numberwidth = 3
 vim.opt.relativenumber = true
 -- vim.opt.signcolumn = 'yes:2'
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
