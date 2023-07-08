@@ -1,24 +1,60 @@
+require("lsp-progress").setup({
+    console_log = true,
+    debug = false,
+    file_log = false,
+})
+
+local function LspIcon()
+    return require("lsp-progress").progress({
+        format = function(messages)
+            local active_clients = vim.lsp.get_active_clients()
+            local client_count = #active_clients
+            if #messages > 0 then
+                return " LSP:"
+                    .. client_count
+                    .. " "
+                    .. table.concat(messages, " ")
+            end
+            if #active_clients <= 0 then
+                return " LSP:" .. client_count
+            else
+                local client_names = {}
+                for i, client in ipairs(active_clients) do
+                    if client and client.name ~= "" then
+                        table.insert(client_names, "[" .. client.name .. "]")
+                        -- print( "client[" .. i .. "]:" .. vim.inspect(client.name))
+                    end
+                end
+                return " LSP:"
+                    .. client_count
+                    .. " "
+                    .. table.concat(client_names, " ")
+            end
+        end,
+    })
+end
+
 require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    theme = 'auto',
-    component_separators = ' ',
-    section_separators = { left = '', right = '' },
-    disabled_filetypes = {
-      statusline = {},
-      winbar = {},
+    options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = ' ',
+        section_separators = { left = '', right = '' },
+        disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        globalstatus = false,
+        refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+        }
     },
-    ignore_focus = {},
-    always_divide_middle = true,
-    globalstatus = false,
-    refresh = {
-      statusline = 1000,
-      tabline = 1000,
-      winbar = 1000,
-    }
-  },
-  sections = {
-        lualine_a = {'mode'},
+    sections = {
+        lualine_a = { 'mode' },
         lualine_b = {
             {
                 'branch',
@@ -28,44 +64,30 @@ require('lualine').setup {
                 'diff',
                 symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
             },
-            'diagnostics'},
+            'diagnostics' },
         lualine_c = {
             {
                 'filename',
                 file_status = true,
                 path = 1,
             },
-            'filesize'},
-        lualine_x = {'encoding',
-            {'fileformat', icons_enabled = false},
-            'filetype',
-            {
-                function()
-                    local msg = 'No Active Lsp'
-                    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                    local clients = vim.lsp.get_active_clients()
-                    if next(clients) == nil then
-                        return msg
-                    end
-                    for _, client in ipairs(clients) do
-                        local filetypes = client.config.filetypes
-                        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                            return client.name
-                        end
-                    end
-                    return msg
-                end,
-                icon = ' ',
-            },
+            LspIcon,
         },
-        lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
+        lualine_x = {
+            -- 'encoding',
+            -- { 'fileformat', icons_enabled = false },
+            'filetype',
+        },
+        lualine_y = { 'progress', 'location' },
+        lualine_z = {
+            "os.date('%a %I:%M %p')"
+        },
+    },
     inactive_sections = {
         lualine_a = {},
-        lualine_b = {"branch"},
-        lualine_c = {'filename'},
-        lualine_x = {'location'},
+        lualine_b = { "branch" },
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
         lualine_y = {},
         lualine_z = {}
     },
@@ -74,3 +96,11 @@ require('lualine').setup {
     inactive_winbar = {},
     extensions = {}
 }
+
+-- refresh lualine
+vim.cmd([[
+augroup lualine_augroup
+    autocmd!
+    autocmd User LspProgressStatusUpdated lua require("lualine").refresh()
+augroup END
+]])

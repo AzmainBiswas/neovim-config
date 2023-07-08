@@ -11,178 +11,209 @@ local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 
 local tex_utils = {}
-tex_utils.in_mathzone = function()  -- math context detection
-    return vim.fn['vimtex#syntax#in_mathzone']() == 1
+tex_utils.in_mathzone = function() -- math context detection
+	return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 end
 tex_utils.in_text = function()
-    return not tex_utils.in_mathzone()
+	return not tex_utils.in_mathzone()
 end
-tex_utils.in_comment = function()  -- comment detection
-    return vim.fn['vimtex#syntax#in_comment']() == 1
+tex_utils.in_comment = function() -- comment detection
+	return vim.fn["vimtex#syntax#in_comment"]() == 1
 end
-tex_utils.in_env = function(name)  -- generic environment detection
-    local is_inside = vim.fn['vimtex#env#is_inside'](name)
-    return (is_inside[1] > 0 and is_inside[2] > 0)
+tex_utils.in_env = function(name) -- generic environment detection
+	local is_inside = vim.fn["vimtex#env#is_inside"](name)
+	return (is_inside[1] > 0 and is_inside[2] > 0)
 end
 -- A few concrete environments---adapt as needed
-tex_utils.in_equation = function()  -- equation environment detection
-    return tex_utils.in_env('equation')
+tex_utils.in_equation = function() -- equation environment detection
+	return tex_utils.in_env("equation")
 end
-tex_utils.in_itemize = function()  -- itemize environment detection
-    return tex_utils.in_env('itemize')
+tex_utils.in_itemize = function() -- itemize environment detection
+	return tex_utils.in_env("itemize")
 end
-tex_utils.in_tikz = function()  -- TikZ picture environment detection
-    return tex_utils.in_env('tikzpicture')
+tex_utils.in_tikz = function() -- TikZ picture environment detection
+	return tex_utils.in_env("tikzpicture")
 end
 
 -- get_visual
 local get_visual = function(args, parent)
-    if (#parent.snippet.env.LS_SELECT_RAW > 0) then
-        return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
-    else  -- If LS_SELECT_RAW is empty, return a blank insert node
-        return sn(nil, i(1))
-    end
+	if #parent.snippet.env.LS_SELECT_RAW > 0 then
+		return sn(nil, i(1, parent.snippet.env.LS_SELECT_RAW))
+	else -- If LS_SELECT_RAW is empty, return a blank insert node
+		return sn(nil, i(1))
+	end
 end
--- For beamer 
+-- For beamer
 tex_utils.in_beamer = function()
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    for _, line in ipairs(lines) do
-        if line:match("\\documentclass{beamer}") then
-            return true
-        end
-    end
-    return false
+	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+	for _, line in ipairs(lines) do
+		if line:match("\\documentclass{beamer}") then
+			return true
+		end
+	end
+	return false
 end
 
--- only expand in new line 
+-- only expand in new line
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
-
 return {
-    -- greak latters
-    s({trig=";a", snippetType="autosnippet"}, { t("\\alpha") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";b", snippetType="autosnippet"}, { t("\\beta") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";g", snippetType="autosnippet"}, { t("\\gamma") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";G", snippetType="autosnippet"}, { t("\\Gamma") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";t", snippetType="autosnippet"}, { t("\\theta") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";p", snippetType="autosnippet"}, { t("\\phi") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";l", snippetType="autosnippet"}, { t("\\lambda") }, {condition = tex_utils.in_mathzone}),
-    s({trig=";L", snippetType="autosnippet"}, { t("\\Lambda") }, {condition = tex_utils.in_mathzone}),
+	-- greak latters
+	s({ trig = ";a", snippetType = "autosnippet" }, { t("\\alpha") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";b", snippetType = "autosnippet" }, { t("\\beta") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";g", snippetType = "autosnippet" }, { t("\\gamma") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";G", snippetType = "autosnippet" }, { t("\\Gamma") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";t", snippetType = "autosnippet" }, { t("\\theta") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";p", snippetType = "autosnippet" }, { t("\\phi") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";l", snippetType = "autosnippet" }, { t("\\lambda") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";L", snippetType = "autosnippet" }, { t("\\Lambda") }, { condition = tex_utils.in_mathzone }),
 
-    -- sets 
-    s({trig="NN", snippetType="autosnippet"}, { t("\\mathds{N}") }, {condition = tex_utils.in_mathzone}),
-    s({trig="QQ", snippetType="autosnippet"}, { t("\\mathds{Q}") }, {condition = tex_utils.in_mathzone}),
-    s({trig="RR", snippetType="autosnippet"}, { t("\\mathds{R}") }, {condition = tex_utils.in_mathzone}),
-    s({trig="CC", snippetType="autosnippet"}, { t("\\mathds{C}") }, {condition = tex_utils.in_mathzone}),
+	-- sets
+	s({ trig = "NN", snippetType = "autosnippet" }, { t("\\mathds{N}") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = "QQ", snippetType = "autosnippet" }, { t("\\mathds{Q}") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = "RR", snippetType = "autosnippet" }, { t("\\mathds{R}") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = "CC", snippetType = "autosnippet" }, { t("\\mathds{C}") }, { condition = tex_utils.in_mathzone }),
 
-    -- math tools
-    s({trig = "infty", snippetType="autosnippet"}, { t("\\infty") }, {condition = tex_utils.in_mathzone}),
-    s({trig = "//", snippetType="autosnippet", wordTrig=false}, fmta( "\\frac{<>}{<>}", { i(1), i(2) }), {condition = tex_utils.in_mathzone} ),
-    s({trig = "__", snippetType="autosnippet", wordTrig=false}, fmta([[ _{<>} ]], {d(1, get_visual)}), {condition = tex_utils.in_mathzone} ),
-    s({trig = "tp", snippetType="autosnippet", wordTrig=false}, fmta([[ ^{<>} ]], {d(1, get_visual)}), {condition = tex_utils.in_mathzone} ),
-    s({trig = "sum", snippetType="autosnippet", wordTrig=false},
-        fmta([[ \sum_{<>}^{<>} ]], { i(1, "i = 0"), i(2, "\\infty") }), {condition = tex_utils.in_mathzone} ),
-    s({trig = "lim", snippetType="autosnippet", wordTrig=false},
-        fmta([[ \lim_{<>} ]], { i(1, "n \\to \\infty") }), {condition = tex_utils.in_mathzone} ),
-    s({trig = "int", snippetType="autosnippet", wordTrig=false},
-        fmta([[ \int_{<>}^{<>} ]], { i(1, "0"), i(2, "\\infty") }), {condition = tex_utils.in_mathzone} ),
+	-- math tools
+	s({ trig = "infty", snippetType = "autosnippet" }, { t("\\infty") }, { condition = tex_utils.in_mathzone }),
+	s(
+		{ trig = "//", snippetType = "autosnippet", wordTrig = false },
+		fmta("\\frac{<>}{<>}", { i(1), i(2) }),
+		{ condition = tex_utils.in_mathzone }
+	),
+	s(
+		{ trig = "__", snippetType = "autosnippet", wordTrig = false },
+		fmta([[ _{<>} ]], { d(1, get_visual) }),
+		{ condition = tex_utils.in_mathzone }
+	),
+	s(
+		{ trig = "tp", snippetType = "autosnippet", wordTrig = false },
+		fmta([[ ^{<>} ]], { d(1, get_visual) }),
+		{ condition = tex_utils.in_mathzone }
+	),
+	s(
+		{ trig = "sum", snippetType = "autosnippet", wordTrig = false },
+		fmta([[ \sum_{<>}^{<>} ]], { i(1, "i = 0"), i(2, "\\infty") }),
+		{ condition = tex_utils.in_mathzone }
+	),
+	s(
+		{ trig = "lim", snippetType = "autosnippet", wordTrig = false },
+		fmta([[ \lim_{<>} ]], { i(1, "n \\to \\infty") }),
+		{ condition = tex_utils.in_mathzone }
+	),
+	s(
+		{ trig = "int", snippetType = "autosnippet", wordTrig = false },
+		fmta([[ \int_{<>}^{<>} ]], { i(1, "0"), i(2, "\\infty") }),
+		{ condition = tex_utils.in_mathzone }
+	),
 
-    -- environments 
-    s({trig="mk", snippetType="autosnippet"}, fmta([[$<>$]], { d(1, get_visual) }) ),
-
-    s({trig="dm", snippetType="autosnippet"},
-        fmta([[
-        \[ 
+	-- environments
+	s({ trig = "mk", snippetType = "autosnippet" }, fmta([[$<>$]], { d(1, get_visual) })),
+	s(
+		{ trig = "dm", snippetType = "autosnippet" },
+		fmta(
+			[[
+        \[
             <>
         \]
-    ]], { i(1, "equation") }) ),
+    ]],
+			{ i(1, "equation") }
+		)
+	),
 
-    s({trig="env", snippetType="autosnippet"},
-        fmta(
-            [[
+	s(
+		{ trig = "env", snippetType = "autosnippet" },
+		fmta(
+			[[
       \begin{<>}
           <>
       \end{<>}
     ]],
-            {
-                i(1),
-                i(2),
-                rep(1),  -- this node repeats insert node i(1)
-            }
-        )
-    ),
+			{
+				i(1),
+				i(2),
+				rep(1), -- this node repeats insert node i(1)
+			}
+		)
+	),
 
-    s({trig="*eqn", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
-        fmta(
-            [[
+	s(
+		{ trig = "*eqn", snippetType = "autosnippet", dscr = "Expands 'eq' into an equation environment" },
+		fmta(
+			[[
        \begin{equation*}
            <>
        \end{equation*}
      ]],
-            { i(1) }
-        )
-    ),
+			{ i(1) }
+		)
+	),
 
-    s({trig="eqn", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
-        fmta(
-            [[
+	s(
+		{ trig = "eqn", snippetType = "autosnippet", dscr = "Expands 'eq' into an equation environment" },
+		fmta(
+			[[
        \begin{equation}
            <>
        \end{equation}
      ]],
-            { i(1) }
-        )
-    ),
+			{ i(1) }
+		)
+	),
 
-    s({trig="*aln", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
-        fmta(
-            [[
+	s(
+		{ trig = "*aln", snippetType = "autosnippet", dscr = "Expands 'eq' into an equation environment" },
+		fmta(
+			[[
        \begin{align*}
            <>
        \end{align*}
      ]],
-            { i(1) }
-        )
-    ),
+			{ i(1) }
+		)
+	),
 
-    s({trig="aln", snippetType="autosnippet", dscr="Expands 'eq' into an equation environment"},
-        fmta(
-            [[
+	s(
+		{ trig = "aln", snippetType = "autosnippet", dscr = "Expands 'eq' into an equation environment" },
+		fmta(
+			[[
        \begin{align}
            <>
        \end{align}
      ]],
-            { i(1) }
-        )
-    ),
+			{ i(1) }
+		)
+	),
 
-    s({trig="enumerate", dscr="enumerate"},
-        fmta(
-            [[
+	s(
+		{ trig = "enumerate", dscr = "enumerate" },
+		fmta(
+			[[
         \begin{enumerate}
             \item <>
         \end{enumerate}
      ]],
-            { i(1) }
-        )
-    ),
+			{ i(1) }
+		)
+	),
 
-    s({trig="itemize", dscr="itemize"},
-        fmta(
-            [[
+	s(
+		{ trig = "itemize", dscr = "itemize" },
+		fmta(
+			[[
         \begin{itemize}
-            \item <> 
+            \item <>
         \end{itemize}
      ]],
-            { i(1) }
-        )
-    ),
+			{ i(1) }
+		)
+	),
 
-    s({trig="itm", snippetType="autosnippet"}, fmta([[ \item <> ]], {i(1, "item")})),
-
-    s({trig="figuer", dscr="for picture insert in latex"},
-        fmta(
-            [[
+	s({ trig = "itm", snippetType = "autosnippet" }, fmta([[ \item <> ]], { i(1, "item") })),
+	s(
+		{ trig = "figuer", dscr = "for picture insert in latex" },
+		fmta(
+			[[
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.7\textwidth]{<>}
@@ -190,85 +221,97 @@ return {
             \label{<>}
         \end{figure}
             ]],
-            {
-                i(1, "picture location"),
-                i(2, "caption"),
-                i(3, "label")
-            }
-        ),
-        {condition = line_begin}
-    ),
+			{
+				i(1, "picture location"),
+				i(2, "caption"),
+				i(3, "label"),
+			}
+		),
+		{ condition = line_begin }
+	),
 
-    s({trig='diff', snippetType='autosnippet'},
-        fmta(
-            [[
+	s(
+		{ trig = "diff", snippetType = "autosnippet" },
+		fmta(
+			[[
             \begin{definition}[<>]
                 <>
             \end{definition}
             <>
-            ]], { i(1), i(2), i(0) }
-        ), {condition = line_begin}
-    ),
+            ]],
+			{ i(1), i(2), i(0) }
+		),
+		{ condition = line_begin }
+	),
 
-    s({trig='thrm', snippetType='autosnippet'},
-        fmta(
-            [[
+	s(
+		{ trig = "thrm", snippetType = "autosnippet" },
+		fmta(
+			[[
             \begin{theorem}[<>]
                 <>
             \end{theorem}
             <>
-            ]], { i(1), i(2), i(0) }
-        ), {condition = line_begin}
-    ),
+            ]],
+			{ i(1), i(2), i(0) }
+		),
+		{ condition = line_begin }
+	),
 
-    s({trig='prf', snippetType='autosnippet'},
-        fmta(
-            [[
+	s(
+		{ trig = "prf", snippetType = "autosnippet" },
+		fmta(
+			[[
             \begin{proof}
                 <>
             \end{proof}
-            ]], { i(1) }
-        ), {condition = line_begin}
-    ),
+            ]],
+			{ i(1) }
+		),
+		{ condition = line_begin }
+	),
 
-    s({trig='eg', snippetType='autosnippet'},
-        fmta(
-            [[
+	s(
+		{ trig = "eg", snippetType = "autosnippet" },
+		fmta(
+			[[
             \begin{example}
                 <>
             \end{example}
-            ]], { i(1) }
-        ), {condition = line_begin}
-    ),
+            ]],
+			{ i(1) }
+		),
+		{ condition = line_begin }
+	),
 
-    s({trig="bfr", snippetType="autosnippet", dscr='begin frame and enf frame for beamer presentstion'},
-        {
-            t({ "\\begin{frame}{" }),
-            i(1, "frame title"),
-            t({ "}", "\t" }),
-            i(0),
-            t({ "", "\\end{frame}" }),
-        },
-        { condition = tex_utils.in_beamer }),
+	s({ trig = "bfr", snippetType = "autosnippet", dscr = "begin frame and enf frame for beamer presentstion" }, {
+		t({ "\\begin{frame}{" }),
+		i(1, "frame title"),
+		t({ "}", "\t" }),
+		i(0),
+		t({ "", "\\end{frame}" }),
+	}, { condition = tex_utils.in_beamer }),
 
-    -- text mods
-    s({trig="txt", snippetType="autosnippet"}, fmta([[ \text{<>} ]], { i(1) }), {condition = tex_utils.in_mathzone}),
-    s({trig="tii", snippetType="autosnippet"}, fmta([[ \textit{<>} ]], { d(1, get_visual) }) ), -- seclect text and press tab and usr prefix
-    s({trig="tbb", snippetType="autosnippet"}, fmta([[ \textbf{<>} ]], { d(1, get_visual) }) ),
-    s({trig="mbb", snippetType="autosnippet"}, fmta([[ \mathbf{<>} ]], { d(1, get_visual) }) ),
-    s({trig="mcl", snippetType="autosnippet"}, fmta([[ \mathcal{<>} ]], { d(1, get_visual) }) ),
+	-- text mods
+	s(
+		{ trig = "txt", snippetType = "autosnippet" },
+		fmta([[ \text{<>} ]], { i(1) }),
+		{ condition = tex_utils.in_mathzone }
+	),
+	s({ trig = "tii", snippetType = "autosnippet" }, fmta([[ \textit{<>} ]], { d(1, get_visual) })), -- seclect text and press tab and usr prefix
+	s({ trig = "tbb", snippetType = "autosnippet" }, fmta([[ \textbf{<>} ]], { d(1, get_visual) })),
+	s({ trig = "mbb", snippetType = "autosnippet" }, fmta([[ \mathbf{<>} ]], { d(1, get_visual) })),
+	s({ trig = "mcl", snippetType = "autosnippet" }, fmta([[ \mathcal{<>} ]], { d(1, get_visual) })),
 
-    -- sections chapter
-    s({trig = "*chap", dscr="un-numbered chapter"},
-        fmta([[\chapter*{<>}]], { i(1) }), {condition = line_begin}),
-    s({trig = "*sce", dscr="un-numbered section"},
-        fmta([[\section*{<>}]], { i(1) }), {condition = line_begin}),
-    s({trig = "chap", dscr="chapter"},
-        fmta([[\chapter{<>}]], { i(1) }), {condition = line_begin}),
-    s({trig = "sce", dscr="Top-level section"},
-        fmta([[\section{<>}]],{ i(1) }), {condition = line_begin}),
-    s({trig = "subsce", dscr="sub section"},
-        fmta([[\subsection{<>}]], { i(1) }), {condition = line_begin}),
-    s({trig = "subsce*", dscr="nu-numbered dunsection"},
-        fmta([[\subsection*{<>}]], { i(1) }), {condition = line_begin}),
+	-- sections chapter
+	s({ trig = "*chap", dscr = "un-numbered chapter" }, fmta([[\chapter*{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "*sce", dscr = "un-numbered section" }, fmta([[\section*{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "chap", dscr = "chapter" }, fmta([[\chapter{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "sce", dscr = "Top-level section" }, fmta([[\section{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "subsce", dscr = "sub section" }, fmta([[\subsection{<>}]], { i(1) }), { condition = line_begin }),
+	s(
+		{ trig = "subsce*", dscr = "nu-numbered dunsection" },
+		fmta([[\subsection*{<>}]], { i(1) }),
+		{ condition = line_begin }
+	),
 }
