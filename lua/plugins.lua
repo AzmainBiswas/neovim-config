@@ -1,7 +1,14 @@
 return {
     { "folke/which-key.nvim",    lazy = true },
-
+    {
+        "norcalli/nvim-colorizer.lua",
+        lazy = true,
+        config = function()
+            require("colorizer").setup()
+        end,
+    },
     { "dstein64/vim-startuptime" },
+    { "mbbill/undotree" },
     -- telescope
     {
         "nvim-telescope/telescope.nvim",

@@ -1,8 +1,8 @@
 local ls = require("luasnip") --{{{
 
 -- require("luasnip.loaders.from_vscode").lazy_load()
--- require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
-require("luasnip.loaders.from_lua").load({ paths = "C:/Users/azmain/AppData/Local/nvim/snippets/" })
+require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+-- require("luasnip.loaders.from_lua").load({ paths = "C:/Users/azmain/AppData/Local/nvim/snippets/" })
 require("luasnip").config.setup({ store_selection_keys = "<A-p>" })
 
 vim.cmd([[command! LuaSnipEdit :lua require("luasnip.loaders.from_lua").edit_snippet_files()]]) --}}}
@@ -73,5 +73,6 @@ end) --}}}
 -- More Settings --
 
 vim.keymap.set("n", "<Leader><CR>", "<cmd>LuaSnipEdit<cr>", { silent = true, noremap = true })
-vim.keymap.set('n', '<Leader>ls', "<cmd>so C:/Users/azmain/AppData/Local/nvim/plugin/luasnip.lua<CR>")
+-- vim.keymap.set('n', '<Leader>ls', "<cmd>so C:/Users/azmain/AppData/Local/nvim/plugin/luasnip.lua<CR>")
+vim.keymap.set('n', '<Leader>ls', "<cmd>so ~/.config/nvim/plugin/luasnip.lua<CR>")
 vim.cmd([[autocmd BufEnter */snippets/*.lua nnoremap <silent> <buffer> <CR> /-- End Refactoring --<CR>O<Esc>O]])

@@ -28,3 +28,6 @@ vim.opt.smartcase = true
 
 -- Makes neovim and host OS clipboard play nicely with each other
 vim.opt.clipboard = "unnamedplus"
+
+
+vim.opt.colorcolumn = "80"

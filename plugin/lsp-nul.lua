@@ -7,6 +7,7 @@ null_ls.setup({
     sources = {
         formatting.black,
         formatting.latexindent,
-        formatting.stylua.with({ extra_args = { "--indent-type Spaces", "--indent-width 4" } }),
+        formatting.stylua.with({
+            extra_args = { "--quote-style ForceDouble", "--indent-type Spaces", "--indent-width 4" } }),
     },
 })

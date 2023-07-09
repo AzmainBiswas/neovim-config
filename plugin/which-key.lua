@@ -59,7 +59,7 @@ local mappings = {
 	},
 	c = { c = {
 		function()
-			vim.cmd("ColorToggle")
+			vim.cmd("ColorizerToggle")
 		end,
 		"Enable Hex colors Preview",
 	} },
@@ -83,6 +83,9 @@ local mappings = {
 		t = { "<CMD>Telescope treesitter<CR>", "treesitter tages" },
 		gc = { "<CMD>Telescope git-status<CR>", "git changed file" },
 	},
+    u = {function ()
+        vim.cmd("UndotreeToggle")
+    end, "Undo tree" }
 }
 
 which_key.setup(setup)
