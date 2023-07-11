@@ -59,12 +59,18 @@ return {
     --     },
     -- tree-sitter
     {
-        { "nvim-treesitter/nvim-treesitter", build = ":tsupdate" },
+        { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
         "nvim-treesitter/nvim-treesitter-context",
     },
     -- useless
     { "eandrju/cellular-automaton.nvim" },
 
+    {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    },
     -- lsp
     {
         "vonheikemen/lsp-zero.nvim",
