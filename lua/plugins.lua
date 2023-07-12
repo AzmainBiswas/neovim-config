@@ -38,14 +38,14 @@ return {
         end
     },
     -- dashbord
-    {
-        "glepnir/dashboard-nvim",
-        event = "VimEnter",
-        config = function()
-            require("dashboard").setup({})
-        end,
-        dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    },
+    -- {
+    --     "glepnir/dashboard-nvim",
+    --     event = "VimEnter",
+    --     config = function()
+    --         require("dashboard").setup({})
+    --     end,
+    --     dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    -- },
     -- nvim-tree
     --     {
     --         "nvim-tree/nvim-tree.lua",
