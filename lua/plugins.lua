@@ -62,6 +62,7 @@ return {
         { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
         "nvim-treesitter/nvim-treesitter-context",
     },
+    { "lukas-reineke/indent-blankline.nvim" },
     -- useless
     { "eandrju/cellular-automaton.nvim" },
 
@@ -91,7 +92,6 @@ return {
             { "hrsh7th/cmp-nvim-lsp" }, -- required
         },
     },
-    { "jose-elias-alvarez/null-ls.nvim" },
     -- git
     { "tpope/vim-fugitive" },
     -- snipets
