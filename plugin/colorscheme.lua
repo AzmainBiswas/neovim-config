@@ -48,5 +48,5 @@ require("gruvbox").setup({
 })
 
 
-local color = color or "gruvbox"
+local color = color or "tokyonight-night"
 vim.cmd.colorscheme(color)
