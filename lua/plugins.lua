@@ -95,8 +95,9 @@ return {
     -- git
     { "tpope/vim-fugitive" },
     -- snipets
-    { "l3mon4d3/luasnip" },
-    { "saadparwaiz1/cmp_luasnip" },
+    -- { "l3mon4d3/luasnip" },
+    -- { "saadparwaiz1/cmp_luasnip" },
+    { "SirVer/ultisnips" },
     -- vimtex
     {
         "lervag/vimtex",

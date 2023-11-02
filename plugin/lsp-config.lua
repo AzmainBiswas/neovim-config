@@ -5,8 +5,8 @@ lsp.preset("recommended")
 lsp.ensure_installed({
 	"lua_ls",
 	--    "pyright",
-	-- "texlab",
-	"ltex",
+	"texlab",
+    --	"ltex",
 })
 
 -- Fix Undefined global 'vim'
