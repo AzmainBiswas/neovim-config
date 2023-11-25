@@ -122,7 +122,7 @@ return {
 	),
 
 	s(
-		{ trig = "env", snippetType = "autosnippet" },
+		{ trig = "beg", snippetType = "autosnippet" },
 		fmta(
 			[[
       \begin{<>}
@@ -216,7 +216,7 @@ return {
 			[[
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.7\textwidth]{<>}
+            \includegraphics[width=0.6\textwidth]{<>}
             \caption{<>}
             \label{<>}
         \end{figure}
@@ -284,6 +284,19 @@ return {
 		{ condition = line_begin }
 	),
 
+	s(
+		{ trig = "cases", snippetType = "autosnippet" },
+		fmta(
+			[[
+            \begin{cases}
+                <>
+            \end{cases}
+            ]],
+			{ i(1) }
+		),
+		{ condition = tex_utils.in_mathzone }
+	),
+
 	s({ trig = "bfr", snippetType = "autosnippet", dscr = "begin frame and enf frame for beamer presentstion" }, {
 		t({ "\\begin{frame}{" }),
 		i(1, "frame title"),
@@ -304,13 +317,13 @@ return {
 	s({ trig = "mcl", snippetType = "autosnippet" }, fmta([[ \mathcal{<>} ]], { d(1, get_visual) })),
 
 	-- sections chapter
-	s({ trig = "*chap", dscr = "un-numbered chapter" }, fmta([[\chapter*{<>}]], { i(1) }), { condition = line_begin }),
-	s({ trig = "*sce", dscr = "un-numbered section" }, fmta([[\section*{<>}]], { i(1) }), { condition = line_begin }),
-	s({ trig = "chap", dscr = "chapter" }, fmta([[\chapter{<>}]], { i(1) }), { condition = line_begin }),
-	s({ trig = "sce", dscr = "Top-level section" }, fmta([[\section{<>}]], { i(1) }), { condition = line_begin }),
-	s({ trig = "subsce", dscr = "sub section" }, fmta([[\subsection{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "*chap", dscr = "un-numbered chapter", snippetType = "autosnippet" }, fmta([[\chapter*{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "*sec", dscr = "un-numbered section", snippetType = "autosnippet" }, fmta([[\section*{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "chap", dscr = "chapter", snippetType = "autosnippet" }, fmta([[\chapter{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "sec", dscr = "Top-level section", snippetType = "autosnippet" }, fmta([[\section{<>}]], { i(1) }), { condition = line_begin }),
+	s({ trig = "subsce", dscr = "sub section", snippetType = "autosnippet" }, fmta([[\subsection{<>}]], { i(1) }), { condition = line_begin }),
 	s(
-		{ trig = "subsce*", dscr = "nu-numbered dunsection" },
+		{ trig = "*subsce", dscr = "nu-numbered dunsection" },
 		fmta([[\subsection*{<>}]], { i(1) }),
 		{ condition = line_begin }
 	),

@@ -95,69 +95,15 @@ return {
     -- git
     { "tpope/vim-fugitive" },
     -- snipets
-    -- { "l3mon4d3/luasnip" },
-    -- { "saadparwaiz1/cmp_luasnip" },
-    { "SirVer/ultisnips" },
+    { "l3mon4d3/luasnip" },
+    { "saadparwaiz1/cmp_luasnip" },
+    -- { "SirVer/ultisnips" },
     -- vimtex
     {
         "lervag/vimtex",
     },
     -- vim-tmux-navigator
-    -- {'christoomey/vim-tmux-navigator', lazy = false},
-    -- navigation
-    {
-        "folke/flash.nvim",
-        event = "VeryLazy",
-        opts = {},
-        keys = {
-            {
-                "s",
-                mode = { "n", "x", "o" },
-                function()
-                    require("flash").jump({
-                        search = {
-                            mode = function(str)
-                                return "\\<" .. str
-                            end,
-                        },
-                    })
-                end,
-                desc = "Flash",
-            },
-            {
-                "S",
-                mode = { "n", "o", "x" },
-                function()
-                    require("flash").treesitter()
-                end,
-                desc = "Flash Treesitter",
-            },
-            {
-                "r",
-                mode = "o",
-                function()
-                    require("flash").remote()
-                end,
-                desc = "Remote Flash",
-            },
-            {
-                "R",
-                mode = { "o", "x" },
-                function()
-                    require("flash").treesitter_search()
-                end,
-                desc = "Flash Treesitter Search",
-            },
-            {
-                "<c-s>",
-                mode = { "c" },
-                function()
-                    require("flash").toggle()
-                end,
-                desc = "Toggle Flash Search",
-            },
-        },
-    },
+    {'christoomey/vim-tmux-navigator', lazy = false},
     -- colorschemes
     "folke/tokyonight.nvim",
     { "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
