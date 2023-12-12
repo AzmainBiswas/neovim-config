@@ -1,7 +1,7 @@
 require("catppuccin").setup({
-    transparent_background = true,
+    transparent_background = false,
     styles = {
-        comments = {},
+        comments = { "italic" },
         conditionals = {},
         loops = {},
         functions = {},
@@ -17,8 +17,10 @@ require("catppuccin").setup({
 })
 
 require("tokyonight").setup({
+    style = "night",
     transparent = true,
     styles = {
+        comments = { italic = true },
         functions = {}
     },
     sidebars = { "qf", "vista_kind", "terminal", "packer" },
@@ -27,7 +29,7 @@ require("tokyonight").setup({
 require("gruvbox").setup({
     undercurl = true,
     underline = true,
-    bold = true,
+    bold = false,
     italic = {
         strings = true,
         comments = true,
@@ -43,10 +45,10 @@ require("gruvbox").setup({
     contrast = "hard", -- can be "hard", "soft" or empty string
     palette_overrides = {},
     overrides = {},
-    dim_inactive = false,
-    transparent_mode = false,
+    dim_inactive = true,
+    transparent_mode = true,
 })
 
 
-local color = color or "catppuccin-mocha"
+local color = color or "gruvbox"
 vim.cmd.colorscheme(color)

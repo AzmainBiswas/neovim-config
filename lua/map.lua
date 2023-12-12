@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- vim.keymap.set("n", "<leader>vp", "<CMD>Ex<CR>")
--- vim.keymap.set({"n", "i", "s"}, "<C-S>", "<ESC><CMD>w<CR>")
+vim.keymap.set({"n", "i", "s"}, "<C-S>", "<ESC><CMD>w<CR>")
 vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
 end)

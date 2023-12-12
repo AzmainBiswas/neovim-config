@@ -64,9 +64,14 @@ return {
 	s({ trig = ";g", snippetType = "autosnippet" }, { t("\\gamma") }, { condition = tex_utils.in_mathzone }),
 	s({ trig = ";G", snippetType = "autosnippet" }, { t("\\Gamma") }, { condition = tex_utils.in_mathzone }),
 	s({ trig = ";t", snippetType = "autosnippet" }, { t("\\theta") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";T", snippetType = "autosnippet" }, { t("\\Theta") }, { condition = tex_utils.in_mathzone }),
 	s({ trig = ";p", snippetType = "autosnippet" }, { t("\\phi") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";P", snippetType = "autosnippet" }, { t("\\pi") }, { condition = tex_utils.in_mathzone }),
 	s({ trig = ";l", snippetType = "autosnippet" }, { t("\\lambda") }, { condition = tex_utils.in_mathzone }),
 	s({ trig = ";L", snippetType = "autosnippet" }, { t("\\Lambda") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";m", snippetType = "autosnippet" }, { t("\\mu") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";e", snippetType = "autosnippet" }, { t("\\epsilon") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ";s", snippetType = "autosnippet" }, { t("\\sigma") }, { condition = tex_utils.in_mathzone }),
 
 	-- sets
 	s({ trig = "NN", snippetType = "autosnippet" }, { t("\\mathds{N}") }, { condition = tex_utils.in_mathzone }),
@@ -76,6 +81,10 @@ return {
 
 	-- math tools
 	s({ trig = "infty", snippetType = "autosnippet" }, { t("\\infty") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = "<=", snippetType = "autosnippet" }, { t("\\le") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = ">=", snippetType = "autosnippet" }, { t("\\ge") }, { condition = tex_utils.in_mathzone }),
+	s({ trig = "...", snippetType = "autosnippet" }, { t("\\ldots") }, { condition = tex_utils.in_mathzone }),
+    s({ trig = "sr", snippetType = "autosnippet" }, { t("^{2}") }, { condition = tex_utils.in_mathzone }),
 	s(
 		{ trig = "//", snippetType = "autosnippet", wordTrig = false },
 		fmta("\\frac{<>}{<>}", { i(1), i(2) }),
@@ -86,6 +95,16 @@ return {
 		fmta([[ _{<>} ]], { d(1, get_visual) }),
 		{ condition = tex_utils.in_mathzone }
 	),
+    s(
+        {trig = "lr(", snippetType="autosnippet", wordTrig = false },
+        fmta("\\left( <> \\right)", {i(1)}),
+        { condition = tex_utils.in_mathzone }
+    ),
+    s(
+        {trig = "lr[", snippetType="autosnippet", wordTrig = false },
+        fmta("\\left[ <> \\right]", {i(1)}),
+        { condition = tex_utils.in_mathzone }
+    ),
 	s(
 		{ trig = "tp", snippetType = "autosnippet", wordTrig = false },
 		fmta([[ ^{<>} ]], { d(1, get_visual) }),
@@ -108,7 +127,7 @@ return {
 	),
 
 	-- environments
-	s({ trig = "mk", snippetType = "autosnippet" }, fmta([[$<>$]], { d(1, get_visual) })),
+	s({ trig = "mk", snippetType = "autosnippet" }, fmta([[$ <> $]], { d(1, get_visual) })),
 	s(
 		{ trig = "dm", snippetType = "autosnippet" },
 		fmta(
@@ -296,14 +315,17 @@ return {
 		),
 		{ condition = tex_utils.in_mathzone }
 	),
-
-	s({ trig = "bfr", snippetType = "autosnippet", dscr = "begin frame and enf frame for beamer presentstion" }, {
-		t({ "\\begin{frame}{" }),
-		i(1, "frame title"),
-		t({ "}", "\t" }),
-		i(0),
-		t({ "", "\\end{frame}" }),
-	}, { condition = tex_utils.in_beamer }),
+	s(
+		{ trig = "bfr", snippetType = "autosnippet", dscr="Begin frame" },
+		fmta(
+			[[
+            \begin{frame}{<>}
+                <>
+            \end{frame}
+            ]],
+			{ i(1) , i(0)}
+		)
+    ),
 
 	-- text mods
 	s(
