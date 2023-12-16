@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	"lua_ls",
-	--    "pyright",
+	"pyright",
 	"texlab",
     --	"ltex",
 })
