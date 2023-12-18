@@ -29,3 +29,8 @@ vim.keymap.set("n", "<leader>gcl", "<cmd>CellularAutomaton game_of_life<CR>")
 
 -- spell checker
 -- vim.keymap.set('n', '<leader>ss', '<CMD>set spell!<CR>')
+--
+-- Telescope
+vim.keymap.set('n', '<C-p>', function ()
+    vim.cmd("Telescope fd")
+end)
