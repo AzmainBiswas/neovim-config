@@ -1,5 +1,5 @@
 require("catppuccin").setup({
-    transparent_background = false,
+    transparent_background = true,
     styles = {
         comments = { "italic" },
         conditionals = {},
@@ -50,5 +50,5 @@ require("gruvbox").setup({
 })
 
 
-local color = color or "gruvbox"
+local color = color or "catppuccin-mocha"
 vim.cmd.colorscheme(color)
