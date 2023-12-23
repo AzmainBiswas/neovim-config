@@ -15,6 +15,14 @@ return {
         tag = "0.1.4",
         dependencies = { "nvim-lua/plenary.nvim" },
     },
+    -- alpha nvim dashbord
+    {
+        'goolord/alpha-nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.startify'.config)
+        end
+    };
     -- lualine
     {
         "nvim-lualine/lualine.nvim",
@@ -30,6 +38,7 @@ return {
             require("lsp-progress").setup()
         end,
     },
+    -- Notifucation
     {
         "j-hui/fidget.nvim",
         tag = 'legacy',
@@ -37,26 +46,6 @@ return {
             require("fidget").setup {}
         end
     },
-    -- dashbord
-    -- {
-    --     "glepnir/dashboard-nvim",
-    --     event = "VimEnter",
-    --     config = function()
-    --         require("dashboard").setup({})
-    --     end,
-    --     dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    -- },
-    -- nvim-tree
-    --     {
-    --         "nvim-tree/nvim-tree.lua",
-    --         version = "*",
-    --         dependencies = {
-    --             "nvim-tree/nvim-web-devicons",
-    --         },
-    --         config = function()
-    --             require("nvim-tree").setup {}
-    --         end,
-    --     },
     -- tree-sitter
     {
         { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -92,8 +81,6 @@ return {
             { "hrsh7th/cmp-nvim-lsp" }, -- required
         },
     },
-    -- git
-    { "tpope/vim-fugitive" },
     -- snipets
     { "l3mon4d3/luasnip" },
     { "saadparwaiz1/cmp_luasnip" },
