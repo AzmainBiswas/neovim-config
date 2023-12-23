@@ -57,12 +57,14 @@ local mappings = {
 		},
 		f = { "<CMD>lua vim.lsp.buf.format()<CR>", "code formater" },
 	},
-	c = { c = {
-		function()
-			vim.cmd("ColorizerToggle")
-		end,
-		"Enable Hex colors Preview",
-	} },
+	c = {
+		c = {
+			function()
+				vim.cmd("ColorizerToggle")
+			end,
+			"Enable Hex colors Preview",
+		},
+	},
 	s = {
 		name = "settings",
 		s = { "<CMD>set spell!<CR>", "spell checker" },
@@ -83,9 +85,12 @@ local mappings = {
 		t = { "<CMD>Telescope treesitter<CR>", "treesitter tages" },
 		gc = { "<CMD>Telescope git-status<CR>", "git changed file" },
 	},
-    u = {function ()
-        vim.cmd("UndotreeToggle")
-    end, "Undo tree" }
+	u = {
+		function()
+			vim.cmd("UndotreeToggle")
+		end,
+		"Undo tree",
+	},
 }
 
 which_key.setup(setup)
