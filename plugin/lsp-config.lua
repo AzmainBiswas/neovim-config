@@ -1,41 +1,61 @@
 local lsp = require("lsp-zero")
 
-lsp.preset("recommended")
-
-lsp.ensure_installed({
-	"lua_ls",
-	-- "pyright",
-	"texlab",
-    --	"ltex",
-})
-
--- Fix Undefined global 'vim'
-lsp.nvim_workspace()
+-- nvim-cmp stuf
 
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-	["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-	["<C-y>"] = cmp.mapping.confirm({ select = true }),
-	["<CR>"] = cmp.mapping.confirm({ select = true }),
-	["<C-Space>"] = cmp.mapping.complete(),
+
+cmp.setup({
+	snippet = {
+		expand = function(args)
+			require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+			-- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+		end,
+	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
+	mapping = cmp.mapping.preset.insert({
+		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+		["<C-j>"] = cmp.mapping.scroll_docs(-4),
+		["<C-k>"] = cmp.mapping.scroll_docs(4),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		["<TAB>"] = cmp.mapping.confirm({ select = true }),
+	}),
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" }, -- For luasnip users.
+		-- { name = 'ultisnips' }, -- For ultisnips users.
+	}, {
+		{ name = "buffer" },
+		{ name = "path" },
+	}),
 })
 
-cmp_mappings["<Tab>"] = cmp.mapping.confirm({ select = true })
-cmp_mappings["<S-Tab>"] = nil
-
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings,
+-- `:` cmdline setup.
+cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = cmp.config.sources({
+		{ name = "path" },
+	}, {
+		{
+			name = "cmdline",
+			option = {
+				ignore_cmds = { "Man", "!" },
+			},
+		},
+	}),
 })
 
-lsp.set_preferences({
-	suggest_lsp_servers = false,
-	sign_icons = {
-		error = "E",
-		warn = "W",
-		hint = "H",
-		info = "I",
+-- `/` cmdline setup.
+cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
+	sources = {
+		{ name = "buffer" },
 	},
 })
 
@@ -70,4 +90,14 @@ lsp.setup()
 
 vim.diagnostic.config({
 	virtual_text = true,
+})
+
+-- mason stuf
+
+require("mason").setup({})
+require("mason-lspconfig").setup({
+	ensure_installed = { "pyright", "lua_ls", "texlab" },
+	handlers = {
+		lsp.default_setup,
+	},
 })

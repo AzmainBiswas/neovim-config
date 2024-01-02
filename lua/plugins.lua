@@ -64,7 +64,7 @@ return {
 	-- lsp
 	{
 		"vonheikemen/lsp-zero.nvim",
-		branch = "v2.x",
+		branch = "v3.x",
 		dependencies = {
 			-- lsp support
 			{ "neovim/nvim-lspconfig" }, -- required
@@ -78,7 +78,9 @@ return {
 
 			-- autocompletion
 			{ "hrsh7th/nvim-cmp" }, -- required
+			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-nvim-lsp" }, -- required
+			{ "hrsh7th/cmp-cmdline" },
 		},
 	},
 	-- snipets
