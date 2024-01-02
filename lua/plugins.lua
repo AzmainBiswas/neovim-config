@@ -12,7 +12,7 @@ return {
 	-- telescope
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.4",
+		branch = "0.1.x",
 		dependencies = { "nvim-lua/plenary.nvim" },
 	},
 	-- alpha nvim dashbord
@@ -38,14 +38,6 @@ return {
 			require("lsp-progress").setup()
 		end,
 	},
-	-- Notifucation
-	{
-		"j-hui/fidget.nvim",
-		tag = "legacy",
-		config = function()
-			require("fidget").setup({})
-		end,
-	},
 	-- tree-sitter
 	{
 		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
@@ -55,12 +47,6 @@ return {
 	-- useless
 	{ "eandrju/cellular-automaton.nvim" },
 
-	{
-		"numToStr/Comment.nvim",
-		config = function()
-			require("Comment").setup()
-		end,
-	},
 	-- lsp
 	{
 		"vonheikemen/lsp-zero.nvim",
