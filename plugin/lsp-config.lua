@@ -1,7 +1,6 @@
 local lsp = require("lsp-zero")
 
 -- nvim-cmp stuf
-
 local cmp = require("cmp")
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
@@ -18,7 +17,9 @@ cmp.setup({
 	},
 	mapping = cmp.mapping.preset.insert({
 		["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+		["<Down>"] = cmp.mapping.select_prev_item(cmp_select),
 		["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+		["<Up>"] = cmp.mapping.select_next_item(cmp_select),
 		["<C-j>"] = cmp.mapping.scroll_docs(-4),
 		["<C-k>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
@@ -93,7 +94,6 @@ vim.diagnostic.config({
 })
 
 -- mason stuf
-
 require("mason").setup({})
 require("mason-lspconfig").setup({
 	ensure_installed = { "pyright", "lua_ls", "texlab" },
