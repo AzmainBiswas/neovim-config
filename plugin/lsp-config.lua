@@ -96,7 +96,7 @@ vim.diagnostic.config({
 -- mason stuf
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "pyright", "lua_ls", "texlab" },
+	ensure_installed = { "pyright", "lua_ls", "texlab", "bashls" },
 	handlers = {
 		lsp.default_setup,
 	},
