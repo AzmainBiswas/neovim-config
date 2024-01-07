@@ -1,18 +1,30 @@
 require("catppuccin").setup({
 	transparent_background = true,
+	no_italic = false,
 	styles = {
 		comments = { "italic" },
-		conditionals = {},
-		loops = {},
-		functions = {},
-		keywords = {},
+		conditionals = { "italic" },
+		loops = { "italic" },
+		functions = { "italic" },
+		keywords = { "bold" },
 		strings = {},
 		variables = {},
-		numbers = {},
-		booleans = {},
+		numbers = { "italic" },
+		booleans = { "italic" },
 		properties = {},
-		types = {},
+		types = { "bold" },
 		operators = {},
+	},
+	integrations = {
+		cmp = true,
+		gitsigns = true,
+		nvimtree = true,
+		treesitter = true,
+		notify = false,
+		mini = {
+			enabled = true,
+			indentscope_color = "",
+		},
 	},
 })
 
@@ -49,5 +61,6 @@ require("gruvbox").setup({
 	transparent_mode = true,
 })
 
+-- local color = color or "gruvbox"
 local color = color or "catppuccin-mocha"
 vim.cmd.colorscheme(color)
