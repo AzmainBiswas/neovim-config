@@ -77,13 +77,13 @@ local mappings = {
 	f = {
 		name = "telescope",
 		f = { "<CMD>Telescope fd<CR>", "find file" },
-		gr = { "<CMD>Telescope live_grep<CR>", "grep word." },
+		g = { "<CMD>Telescope live_grep<CR>", "grep word." },
 		b = { "<CMD>Telescope buffers<CR>", "switch buffer" },
 		h = { "<CMD>Telescope help_tags<CR>", "Help Tags" },
 		c = { "<CMD>Telescope colorscheme<CR>", "change colorscheme" },
 		s = { "<CMD>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy find in files" },
 		t = { "<CMD>Telescope treesitter<CR>", "treesitter tages" },
-		gc = { "<CMD>Telescope git-status<CR>", "git changed file" },
+		-- gc = { "<CMD>Telescope git-status<CR>", "git changed file" },
 	},
 	u = {
 		function()
