@@ -34,3 +34,8 @@ vim.keymap.set("n", "<leader>gcl", "<cmd>CellularAutomaton game_of_life<CR>")
 vim.keymap.set("n", "<C-p>", function()
 	vim.cmd("Telescope fd")
 end)
+
+-- some keymaps
+vim.keymap.set("i", "[", "[]<left>")
+vim.keymap.set("i", "(", "()<left>")
+vim.keymap.set("i", "{", "{}<left>")
